@@ -13,3 +13,9 @@ COPY . /var/www/html/
 # Set proper permissions
 RUN chown -R www-data:www-data /var/www/html \
     && chmod -R 755 /var/www/html
+
+# Expose Apache port
+EXPOSE 80
+
+# Start Apache when the container runs
+CMD ["apache2-foreground"]

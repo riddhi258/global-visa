@@ -320,7 +320,7 @@ if (isset($_POST['submit'])) {
 
     if (empty($error)) {
         // Database connection
-        $con = new mysqli("host.docker.internal", "root", "root", "growmore");
+        $con = new mysqli("mysql", "root", "root", "growmore");
         if ($con->connect_error) {
             die("Connection failed: " . $con->connect_error);
         }

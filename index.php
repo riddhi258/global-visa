@@ -318,41 +318,42 @@ if (isset($_POST['submit'])) {
     //     }
     // }
 
-    if (empty($error)) {
-        $servername = "127.0.0.1"; // or the host provided by your environment
-        $username = "root";         // use the username provided
-        $password = "";             // blank or provided password
-        $dbname = "growmore";
-        $port = 3306;               // change if your environment uses a different port
+    $servername = "localhost"; // change from 127.0.0.1
+    $username = "root";
+    $password = "";
+    $dbname = "growmore";
 
-        $con = new mysqli($servername, $username, $password, $dbname, $port);
+    $conn = new mysqli($servername, $username, $password, $dbname);
 
-        if ($con->connect_error) {
-            die("Connection failed: " . $con->connect_error);
-        }
-
-
-        // NOTE: make sure your 'leads' table has 'consent' and 'newsletter' columns (INT or TINYINT)
-        $stmt = $con->prepare("INSERT INTO leads (name, email, location, mobile, inquiry, source, message) VALUES (?, ?, ?, ?, ?, ?, ?)");
-        if (!$stmt) {
-            die("Prepare failed: " . $con->error);
-        }
-
-        // bind (8 strings, 2 integers)
-        $stmt->bind_param("sssssss", $name, $email, $location, $mobile, $inquiry, $source, $message);
-
-        if ($stmt->execute()) {
-            $success = "Form submitted successfully!";
-            // clear POST values to avoid re-populating form after success
-            $_POST = [];
-        } else {
-            $error = "Error submitting form: " . $stmt->error;
-        }
-
-        $stmt->close();
-        $con->close();
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
     }
+    echo "Connected successfully!";
+
+
+
+
+    // NOTE: make sure your 'leads' table has 'consent' and 'newsletter' columns (INT or TINYINT)
+    $stmt = $con->prepare("INSERT INTO leads (name, email, location, mobile, inquiry, source, message) VALUES (?, ?, ?, ?, ?, ?, ?)");
+    if (!$stmt) {
+        die("Prepare failed: " . $con->error);
+    }
+
+    // bind (8 strings, 2 integers)
+    $stmt->bind_param("sssssss", $name, $email, $location, $mobile, $inquiry, $source, $message);
+
+    if ($stmt->execute()) {
+        $success = "Form submitted successfully!";
+        // clear POST values to avoid re-populating form after success
+        $_POST = [];
+    } else {
+        $error = "Error submitting form: " . $stmt->error;
+    }
+
+    $stmt->close();
+    $con->close();
 }
+
 ?>
 <!doctype html>
 <html lang="en">

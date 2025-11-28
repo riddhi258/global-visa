@@ -279,7 +279,7 @@ if (isset($_POST['submit'])) {
 
     if (empty($error)) {
         // Database connection
-        $con = new mysqli("mysql", "root", "root", "growmore");
+        $con = new mysqli("mysql", "root", "", "growmore");
 
         // SECURE CONNECTION ERROR HANDLING
         if ($con->connect_error) {

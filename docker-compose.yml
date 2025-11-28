@@ -10,13 +10,13 @@ services:
     environment:
       DB_HOST: mysql
       DB_USER: root
-      DB_PASS: root
+      DB_PASS: root@123
       DB_NAME: growmore
 
   mysql:
     image: mysql:8
     environment:
-      MYSQL_ROOT_PASSWORD: root    # <--- REQUIRED
+      MYSQL_ROOT_PASSWORD: root@123   # <--- REQUIRED
       MYSQL_DATABASE: growmore
     ports:
       - "3306:3306"

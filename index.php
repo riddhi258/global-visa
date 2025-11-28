@@ -318,7 +318,7 @@ if (isset($_POST['submit'])) {
     //     }
     // }
 
-    $servername = "localhost"; // change from 127.0.0.1
+    $servername = "mysql"; // change from 127.0.0.1
     $username = "root";
     $password = "root@123";
     $dbname = "growmore";

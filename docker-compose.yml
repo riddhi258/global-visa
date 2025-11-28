@@ -1,11 +1,21 @@
 services:
+  php:
+    build: .
+    ports:
+      - "8080:80"
+    depends_on:
+      - mysql
+    environment:
+      - MYSQL_HOST=mysql
+    # networks automatically created by compose
+
   mysql:
     image: mysql:8
     environment:
       MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: growmore
+      MYSQL_DATABASE: grow
+    volumes:
+      - mysql_data:/var/lib/mysql
 
-  php:
-    build: .
-    depends_on:
-      - mysql
+volumes:
+  mysql_data:

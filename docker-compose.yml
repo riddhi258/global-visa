@@ -1,19 +1,12 @@
 services:
   php:
     build: .
-    ports:
-      - "8080:80"
-    volumes:
-      - .:/var/www/html
     depends_on:
       - mysql
-
   mysql:
     image: mysql:8
-    restart: always
     environment:
       MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: mydb
+      MYSQL_DATABASE: growmore
     ports:
       - "3306:3306"
-    command: --default-authentication-plugin=mysql_native_password

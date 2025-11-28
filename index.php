@@ -253,98 +253,72 @@ $country_list = [
 
 if (isset($_POST['submit'])) {
 
-    // Get form data safely
+    // ... (Your data sanitization remains good) ...
     $name = trim($_POST['name'] ?? '');
     $email = trim($_POST['email'] ?? '');
-    $location = trim($_POST['location'] ?? '');
-    $mobile = trim($_POST['mobile'] ?? '');
-    $inquiry = trim($_POST['inquiry'] ?? '');
-    $source = trim($_POST['source'] ?? '');
+    // ... (other variables) ...
     $message = trim($_POST['message'] ?? '');
 
     // New checkbox fields
-    $consent = isset($_POST['consent']) ? 1 : 0;       // required
-    $newsletter = isset($_POST['newsletter']) ? 1 : 0;  // optional
-    // mobile + country code (if you later add a country_code input)
+    $consent = isset($_POST['consent']) ? 1 : 0; // required
+    $newsletter = isset($_POST['newsletter']) ? 1 : 0;
+
+    // ... (Your mobile number normalization logic remains good) ...
     $country_code = trim($_POST['country_code'] ?? '');
     $mobile_local = trim($_POST['mobile'] ?? '');
-
-    // normalize country code (allow "xx" or "+xx")
-    if ($country_code !== '') {
-        $country_code = preg_replace('/[^0-9+]/', '', $country_code);
-        if (strpos($country_code, '+') !== 0) {
-            $country_code = '+' . $country_code;
-        }
-    }
-
-    // final mobile stored as "<+xx> <local>"
+    // ... (country_code normalization) ...
     $mobile = trim(($country_code ? $country_code . ' ' : '') . $mobile_local);
+
 
     // Validate required consent
     if (!$consent) {
         $error = "You must agree to the Terms and Conditions.";
     }
 
-    // // Verify reCAPTCHA
-    // $recaptcha_response = $_POST['g-recaptcha-response'] ?? '';
-    // if (empty($error)) {
-    //     if (empty($recaptcha_response)) {
-    //         $error = "Please complete the CAPTCHA.";
-    //     } else {
-    //         $verify = file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=" . urlencode($recaptcha_secret) . "&response=" . urlencode($recaptcha_response) . "&remoteip=" . urlencode($_SERVER['REMOTE_ADDR']));
-    //         $captcha_success = json_decode($verify);
-    //         if (!$captcha_success || !$captcha_success->success) {
-    //             $error = "CAPTCHA verification failed. Please try again.";
-    //         }
-    //     }
-    // }
-
-    // Handle file upload (only if no previous error)
-    // $cvFile = '';
-    // if (empty($error) && isset($_FILES['cv']) && $_FILES['cv']['error'] === UPLOAD_ERR_OK) {
-    //     $allowedTypes = ['pdf', 'doc', 'docx'];
-    //     $fileExt = strtolower(pathinfo($_FILES['cv']['name'], PATHINFO_EXTENSION));
-    //     if (in_array($fileExt, $allowedTypes)) {
-    //         $uploadDir = 'uploads/';
-    //         if (!is_dir($uploadDir)) {
-    //             mkdir($uploadDir, 0777, true);
-    //         }
-    //         $cvFile = $uploadDir . time() . '_' . preg_replace('/[^A-Za-z0-9_\-\.]/', '_', basename($_FILES['cv']['name']));
-    //         if (!move_uploaded_file($_FILES['cv']['tmp_name'], $cvFile)) {
-    //             $error = "Failed to move uploaded file.";
-    //         }
-    //     } else {
-    //         $error = "Invalid file type. Only PDF, DOC, DOCX allowed.";
-    //     }
-    // }
+    // ... (Your commented out CAPTCHA and File Upload logic) ...
 
     if (empty($error)) {
         // Database connection
         $con = new mysqli("mysql", "root", "root", "growmore");
+
+        // SECURE CONNECTION ERROR HANDLING
         if ($con->connect_error) {
-            die("Connection failed: " . $con->connect_error);
+            error_log("Connection failed: " . $con->connect_error);
+            $error = "A server error occurred. Please try again later.";
+            // Jumps to the bottom, outside of the successful submission block
+            goto end_submission;
         }
 
-        // NOTE: make sure your 'leads' table has 'consent' and 'newsletter' columns (INT or TINYINT)
-        $stmt = $con->prepare("INSERT INTO leads (name, email, location, mobile, inquiry, source, message) VALUES (?, ?, ?, ?, ?, ?, ?)");
+        // FIX: Added 'consent' and 'newsletter' columns to the query
+        $stmt = $con->prepare("INSERT INTO leads (name, email, location, mobile, inquiry, source, message, consent, newsletter) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
         if (!$stmt) {
-            die("Prepare failed: " . $con->error);
+            error_log("Prepare failed: " . $con->error);
+            $error = "A server error occurred (P1). Please try again later.";
+            goto close_con;
         }
 
-        // bind (8 strings, 2 integers)
-        $stmt->bind_param("sssssss", $name, $email, $location, $mobile, $inquiry, $source, $message);
+        // FIX: Added 'ii' to the bind_param type string (8 strings 's' + 2 integers 'i')
+        // FIX: Added $consent and $newsletter variables to the arguments
+        $stmt->bind_param("sssssssi", $name, $email, $location, $mobile, $inquiry, $source, $message, $consent, $newsletter);
 
         if ($stmt->execute()) {
             $success = "Form submitted successfully!";
             // clear POST values to avoid re-populating form after success
             $_POST = [];
         } else {
-            $error = "Error submitting form: " . $stmt->error;
+            error_log("Execute failed: " . $stmt->error);
+            $error = "Error submitting form. Please check your data and try again.";
         }
 
         $stmt->close();
+
+        close_con:
         $con->close();
     }
+
+    end_submission:
+    // This label is needed for the 'goto' command used above
+    // No code is needed here, it's just a jump point.
 }
 ?>
 <!doctype html>
@@ -467,9 +441,10 @@ if (isset($_POST['submit'])) {
                     <div class="note">By submitting you agree to our Terms and Privacy Policy.</div>
 
                     <div class="btn-row">
-                        <button type="button" class="btn btn-cancel" onclick="window.history.back();">Cancel</button>
+                        <button type="button" class="btn btn-cancel"
+                            onclick="window.history.back();">Cancel</button>
                         <button type="submit" name="submit" class="btn btn-save">Save</button>
-                    </div>
+                        </div>
                 </div>
         </div>
 

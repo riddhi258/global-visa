@@ -320,7 +320,7 @@ if (isset($_POST['submit'])) {
 
     $servername = "localhost"; // change from 127.0.0.1
     $username = "root";
-    $password = "";
+    $password = "root@123";
     $dbname = "growmore";
 
     $con = new mysqli($servername, $username, $password, $dbname);

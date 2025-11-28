@@ -16,7 +16,11 @@ services:
       MYSQL_ROOT_PASSWORD: root@123
       MYSQL_DATABASE: growmore
     ports:
-      - "3307:3306"   # Host port 3307 → container port 3306
+      - "3307:3306"
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 5s
+      retries: 5
     volumes:
       - mysql_data:/var/lib/mysql
 

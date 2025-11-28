@@ -28,8 +28,8 @@ services:
     networks:
       - appnet
 
-volumes:
-  mysql_data:
-
 networks:
   appnet:
+
+volumes:
+  mysql_data:

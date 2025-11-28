@@ -279,13 +279,8 @@ if (isset($_POST['submit'])) {
 
     if (empty($error)) {
         // Database connection
-        $host = '127.0.0.1';  // localhost also works
-        $user = 'root';
-        $pass = '';           // XAMPP default is empty
-        $db = 'growmore';
-        $port = 3306;         // optional if default
+       $con = new mysqli('localhost', 'root', '', 'growmore');
 
-        $conn = new mysqli($host, $user, $pass, $db, $port);
         // SECURE CONNECTION ERROR HANDLING
         if ($con->connect_error) {
             error_log("Connection failed: " . $con->connect_error);
@@ -446,9 +441,10 @@ if (isset($_POST['submit'])) {
                     <div class="note">By submitting you agree to our Terms and Privacy Policy.</div>
 
                     <div class="btn-row">
-                        <button type="button" class="btn btn-cancel" onclick="window.history.back();">Cancel</button>
+                        <button type="button" class="btn btn-cancel"
+                            onclick="window.history.back();">Cancel</button>
                         <button type="submit" name="submit" class="btn btn-save">Save</button>
-                    </div>
+                        </div>
                 </div>
         </div>
 

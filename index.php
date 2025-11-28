@@ -327,13 +327,13 @@ if (isset($_POST['submit'])) {
     if ($con->connect_error) {
         die("Connection failed: " . $conn->connect_error);
     }
-    echo "Connected successfully!";
+    // echo "Connected successfully!";
 
 
 
 
     // NOTE: make sure your 'leads' table has 'consent' and 'newsletter' columns (INT or TINYINT)
-    $stmt = $con->prepare("INSERT INTO leads (name, email, location, mobile, inquiry, source, message) VALUES (?, ?, ?, ?, ?, ?, ?)");
+    $stmt = $con->prepare("INSERT INTO leads(name, email, location, mobile, inquiry, source, message) VALUES (?, ?, ?, ?, ?, ?, ?)");
     if (!$stmt) {
         die("Prepare failed: " . $con->error);
     }

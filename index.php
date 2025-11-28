@@ -319,11 +319,18 @@ if (isset($_POST['submit'])) {
     // }
 
     if (empty($error)) {
-        // Database connection
-        $con = new mysqli("localhost", "root", "", "growmore");
+        $servername = "127.0.0.1"; // or the host provided by your environment
+        $username = "root";         // use the username provided
+        $password = "";             // blank or provided password
+        $dbname = "growmore";
+        $port = 3306;               // change if your environment uses a different port
+
+        $con = new mysqli($servername, $username, $password, $dbname, $port);
+
         if ($con->connect_error) {
             die("Connection failed: " . $con->connect_error);
         }
+
 
         // NOTE: make sure your 'leads' table has 'consent' and 'newsletter' columns (INT or TINYINT)
         $stmt = $con->prepare("INSERT INTO leads (name, email, location, mobile, inquiry, source, message) VALUES (?, ?, ?, ?, ?, ?, ?)");

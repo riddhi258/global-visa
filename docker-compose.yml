@@ -1,15 +1,19 @@
 services:
   php:
     build: .
+    container_name: demo-php-1
     depends_on:
       - mysql
     ports:
       - "8080:80"
     volumes:
       - ./:/var/www/html
+    networks:
+      - appnet
 
   mysql:
     image: mysql:8
+    container_name: demo-mysql-1
     environment:
       MYSQL_ROOT_PASSWORD: root@123
       MYSQL_DATABASE: growmore
@@ -21,6 +25,11 @@ services:
       retries: 5
     volumes:
       - mysql_data:/var/lib/mysql
+    networks:
+      - appnet
 
 volumes:
   mysql_data:
+
+networks:
+  appnet:

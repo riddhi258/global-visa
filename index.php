@@ -320,8 +320,7 @@ if (isset($_POST['submit'])) {
 
     if (empty($error)) {
         // Database connection
-        $con = new mysqli('127.0.0.1', 'root', 'Riddhi@123', 'growmore', 3306, '/var/run/mysqld/mysqld.sock');
-
+        $con = new mysqli("localhost", "root", "", "growmore");
         if ($con->connect_error) {
             die("Connection failed: " . $con->connect_error);
         }

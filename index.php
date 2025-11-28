@@ -322,8 +322,7 @@ if (isset($_POST['submit'])) {
     $username = "root";
     $password = "root@123";
     $dbname = "growmore";
-
-    $con = new mysqli($servername, $username, $password, $dbname,3306);
+    $con = new mysqli($servername, $username, $password, $dbname,3307);
 
     if ($con->connect_error) {
         die("Connection failed: " . $conn->connect_error);

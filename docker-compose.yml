@@ -1,27 +1,21 @@
-version: "3.8"
-
+version: "3.9"
 services:
   php:
     build: .
-    container_name: php_app
     depends_on:
       - mysql
     ports:
-      - "8080:80"
-    networks:
-      - appnet
+      - "8080:80"   # Assuming your PHP app runs on port 80
 
   mysql:
     image: mysql:8
-    container_name: mysql_db
     environment:
-      MYSQL_ROOT_PASSWORD: root@123
+      MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: growmore
-    command: --default-authentication-plugin=mysql_native_password
     ports:
-      - "3306:3306"
-    networks:
-      - appnet
+      - "3307:3306"   # Change host port from 3306 -> 3307
+    volumes:
+      - mysql_data:/var/lib/mysql
 
-networks:
-  appnet:
+volumes:
+  mysql_data:

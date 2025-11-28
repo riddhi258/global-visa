@@ -1,19 +1,22 @@
-version: "3.9"
 services:
   php:
     build: .
+    container_name: demo-php-1
     depends_on:
       - mysql
     ports:
-      - "8080:80"   # Assuming your PHP app runs on port 80
+      - "8080:80"
+    volumes:
+      - ./:/var/www/html
 
   mysql:
     image: mysql:8
+    container_name: demo-mysql-1
     environment:
       MYSQL_ROOT_PASSWORD: root@123
       MYSQL_DATABASE: growmore
     ports:
-      - "3307:3306"   # Change host port from 3306 -> 3307
+      - "3307:3306"   # Host port 3307 → container port 3306
     volumes:
       - mysql_data:/var/lib/mysql
 

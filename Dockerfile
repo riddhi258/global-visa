@@ -1,21 +1,20 @@
-# Use official PHP image with Apache
+# Use official PHP with Apache
 FROM php:8.2-apache
 
-# Enable Apache mod_rewrite (important for routing)
+# Enable Apache mod_rewrite
 RUN a2enmod rewrite
 
-# Install required PHP extensions (add more if needed)
-RUN docker-php-ext-install mysqli pdo pdo_mysql
+# Set working directory
+WORKDIR /var/www/html
 
-# Copy project files to Apache server directory
-COPY . /var/www/html/
+# Copy your PHP code into container
+COPY . .
 
-# Set proper permissions
-RUN chown -R www-data:www-data /var/www/html \
-    && chmod -R 755 /var/www/html
+# Install mysqli extension
+RUN docker-php-ext-install mysqli
 
-# Expose Apache port
-EXPOSE 80
+# Fix Apache ServerName warning
+RUN echo "ServerName localhost" >> /etc/apache2/apache2.conf
 
-# Start Apache when the container runs
+# Ensure Apache runs in foreground
 CMD ["apache2-foreground"]

@@ -1,36 +1,33 @@
+version: '3.9'
+
 services:
   php:
     build: .
     container_name: demo-php
     ports:
       - "8080:80"
-    depends_on:
-      - mysql
     environment:
-      DB_HOST: mysql
-      DB_USER: root
-      DB_PASSWORD: root@123
+      # Optional: environment variables for local testing
+      DB_HOST: localhost
+      DB_PORT: 5432
       DB_NAME: growmore
-
-  mysql:
-    image: mysql:8
-    container_name: demo-mysql
-    environment:
-      MYSQL_ROOT_PASSWORD: root@123
-      MYSQL_DATABASE: growmore
-      MYSQL_USER: root
-      MYSQL_PASSWORD: root@123
-    ports:
-      - "3307:3306"
+      DB_USER: growmore_user
+      DB_PASSWORD: CjzTtIVUbsQgTVFzzlFa0vzGAOUnZggG
+    networks:
+      - app-network
+    volumes:
+      - ./app:/var/www/html   # mount your PHP files
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
     container_name: demo-phpmyadmin
-    depends_on:
-      - mysql
     ports:
       - "8081:80"
     environment:
-      PMA_HOST: mysql
-      PMA_PORT: 3306
-      MYSQL_ROOT_PASSWORD: root@123
+      PMA_ARBITRARY: 1         # allows connecting to external DBs like Render
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge

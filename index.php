@@ -318,14 +318,15 @@ if (isset($_POST['submit'])) {
     //     }
     // }
 
-    $servername = "mysql"; // change from 127.0.0.1
-    $username = "root";
-    $password = "root@123";
-    $dbname = "growmore";
-    $con = new mysqli($servername, $username, $password, $dbname,3306);
+    try {
+        $servername = "mysql"; // change from 127.0.0.1
+        $username = "root";
+        $password = "root@123";
+        $dbname = "growmore";
+        $con = new mysqli($servername, $username, $password, $dbname, 3306);
 
-    if ($con->connect_error) {
-        die("Connection failed: " . $con->connect_error);
+    } catch (Exception $e) {
+        echo "Connection failed: " . $e->getMessage();
     }
     // echo "Connected successfully!";
 

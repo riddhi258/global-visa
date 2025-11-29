@@ -318,20 +318,20 @@ if (isset($_POST['submit'])) {
     //     }
     // }
 
-    $db_host = "dpg-d4176qa4d50c73dtfcq0-a.oregon-postgres.render.com";
-    $db_port = "5432";
-    $db_name = "growmore_c1tn";
-    $db_user = "growmore_c1tn_user";
-    $db_pass = "CjzTtIVUbsQgTVFzzlFa0vzGAOUnZggG";
+    $con = pg_connect("
+    host=dpg-d4176qa4d50c73dtfcq0-a.oregon-postgres.render.com
+    port=5432
+    dbname=growmore_c1tn
+    user=growmore_c1tn_user
+    password=YOUR_PASSWORD
+    sslmode=require
+");
 
-    $conn = pg_connect("host=$db_host port=$db_port dbname=$db_name user=$db_user password=$db_pass");
 
-    if (!$conn) {
+    if (!$con) {
         die("Failed to connect: " . pg_last_error());
     }
-    if ($con->connect_error) {
-        die("Connection failed: " . $con->connect_error);
-    }
+ 
     // echo "Connected successfully!";
 
 

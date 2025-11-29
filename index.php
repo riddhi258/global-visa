@@ -317,18 +317,16 @@ if (isset($_POST['submit'])) {
     //         $error = "Invalid file type. Only PDF, DOC, DOCX allowed.";
     //     }
     // }
-    $servername = getenv('DB_HOST');
-    $username = getenv('DB_USER');
-    $password = getenv('DB_PASSWORD');
-    $dbname = getenv('DB_NAME');
-    $port = getenv('DB_PORT') ?: 3306;
 
-    $con = new mysqli($servername, $username, $password, $dbname, $port);
+    $servername = "mysql"; // change from 127.0.0.1
+    $username = "root";
+    $password = "root@123";
+    $dbname = "growmore";
+    $con = new mysqli($servername, $username, $password, $dbname,3306);
 
     if ($con->connect_error) {
         die("Connection failed: " . $con->connect_error);
     }
-
     // echo "Connected successfully!";
 
 

@@ -7,24 +7,25 @@ services:
     ports:
       - "8080:80"
     environment:
-      # Optional: environment variables for local testing
-      DB_HOST: localhost
+      DB_HOST: dpg-d4176qa4d50c73dtfcq0-a.oregon-postgres.render.com
       DB_PORT: 5432
       DB_NAME: growmore_c1tn
       DB_USER: growmore_c1tn_user
       DB_PASSWORD: CjzTtIVUbsQgTVFzzlFa0vzGAOUnZggG
+      DB_SSL: require
     networks:
       - app-network
     volumes:
-      - ./app:/var/www/html   # mount your PHP files
+      - ./app:/var/www/html
 
-  phpmyadmin:
-    image: phpmyadmin/phpmyadmin
-    container_name: demo-phpmyadmin
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: demo-pgadmin
     ports:
-      - "8081:80"
+      - "8082:80"
     environment:
-      PMA_ARBITRARY: 1         # allows connecting to external DBs like Render
+      PGADMIN_DEFAULT_EMAIL: admin@growmore.com
+      PGADMIN_DEFAULT_PASSWORD: admin123
     networks:
       - app-network
 

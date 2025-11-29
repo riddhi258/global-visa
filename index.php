@@ -70,8 +70,24 @@ if (isset($_POST['submit'])) {
     if (!$consent) $error = "You must agree to the Terms and Conditions.";
 
     // PostgreSQL connection
-    $conn_string = "host=dpg-d4176qa4d50c73dtfcq0-a.oregon-postgres.render.com port=5432 dbname=growmore_c1tn user=growmore_c1tn_user password=CjzTtIVUbsQgTVFzzlFa0vzGAOUnZggG sslmode=require";
-    $con = pg_connect($conn_string);
+   $conn_string = "
+    host=dpg-d4176qa4d50c73dtfcq0-a.oregon-postgres.render.com
+    port=5432
+    dbname=growmore_c1tn
+    user=growmore_c1tn_user
+    password=CjzTtIVUbsQgTVFzzlFa0vzGAOUnZggG
+    sslmode=require 
+    sslrootcert=ignore
+";
+
+$con = pg_connect($conn_string);
+
+if (!$con) {
+    die("Connection failed: " . pg_last_error($con));
+}
+
+echo "Connected!";
+
 
 if (!$con) {
     die("❌ PostgreSQL Connection Failed: " . pg_last_error());

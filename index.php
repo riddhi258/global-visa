@@ -318,15 +318,19 @@ if (isset($_POST['submit'])) {
     //     }
     // }
 
-    try {
-        $servername = "mysql"; // change from 127.0.0.1
-        $username = "root";
-        $password = "root@123";
-        $dbname = "growmore";
-        $con = new mysqli($servername, $username, $password, $dbname, 3306);
+    $db_host = "dpg-d4176qa4d50c73dtfcq0-a";
+    $db_port = "5432";
+    $db_name = "growmore_c1tn";
+    $db_user = "growmore_c1tn_user";
+    $db_pass = "CjzTtIVUbsQgTVFzzlFa0vzGAOUnZggG";
 
-    } catch (PDOException $e) {
-        echo "Connection failed: " . $e->getMessage();
+    $conn = pg_connect("host=$db_host port=$db_port dbname=$db_name user=$db_user password=$db_pass");
+
+    if (!$conn) {
+        die("Failed to connect: " . pg_last_error());
+    }
+    if ($con->connect_error) {
+        die("Connection failed: " . $con->connect_error);
     }
     // echo "Connected successfully!";
 

@@ -325,7 +325,7 @@ if (isset($_POST['submit'])) {
         $dbname = "growmore";
         $con = new mysqli($servername, $username, $password, $dbname, 3306);
 
-    } catch (Exception $e) {
+    } catch (PDOException $e) {
         echo "Connection failed: " . $e->getMessage();
     }
     // echo "Connected successfully!";

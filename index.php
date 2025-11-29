@@ -327,10 +327,6 @@ if (isset($_POST['submit'])) {
 
     $con = @pg_connect($conn_string); // suppress warning
 
-    if (!$con) {
-        die("Connection failed: Unable to connect to PostgreSQL server. Check network, credentials, and SSL.");
-    }
-
     echo "Connected successfully!";
 
 

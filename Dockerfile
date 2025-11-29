@@ -1,24 +1,18 @@
-# PHP 8.2 with Apache
 FROM php:8.2-apache
 
-# Working directory
-WORKDIR /var/www/html
-
-# Enable Apache rewrite
+# Enable Apache mod_rewrite
 RUN a2enmod rewrite
 
-# Install dependencies
-RUN apt-get update && \
-    apt-get install -y libpq-dev ca-certificates && \
-    docker-php-ext-install pgsql pdo_pgsql mysqli && \
-    update-ca-certificates && \
-    apt-get clean && rm -rf /var/lib/apt/lists/*
+# Install PostgreSQL + SSL support
+RUN apt-get update && apt-get install -y libpq-dev && docker-php-ext-install pgsql
 
-# Prevent Apache warning
-RUN echo "ServerName localhost" >> /etc/apache2/apache2.conf
+# Install mysqli (optional for local)
+RUN docker-php-ext-install mysqli
 
-# Copy project files
+# Set working directory
+WORKDIR /var/www/html
+
+# Copy files
 COPY . .
 
-# Start Apache
 CMD ["apache2-foreground"]

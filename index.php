@@ -318,7 +318,7 @@ if (isset($_POST['submit'])) {
     //     }
     // }
 
-    $db_host = "dpg-d4176qa4d50c73dtfcq0-a";
+    $db_host = "dpg-d4176qa4d50c73dtfcq0-a.oregon-postgres.render.com";
     $db_port = "5432";
     $db_name = "growmore_c1tn";
     $db_user = "growmore_c1tn_user";

@@ -317,18 +317,18 @@ if (isset($_POST['submit'])) {
     //         $error = "Invalid file type. Only PDF, DOC, DOCX allowed.";
     //     }
     // }
-
-    $host = getenv('DB_HOST');       // provided by Render
-    $user = getenv('DB_USER');
+    $servername = getenv('DB_HOST');
+    $username = getenv('DB_USER');
     $password = getenv('DB_PASSWORD');
     $dbname = getenv('DB_NAME');
-    $port = getenv('DB_PORT');
+    $port = getenv('DB_PORT') ?: 3306;
 
-    $con = new mysqli($host, $user, $password, $dbname, $port);
+    $con = new mysqli($servername, $username, $password, $dbname, $port);
 
     if ($con->connect_error) {
         die("Connection failed: " . $con->connect_error);
     }
+
     // echo "Connected successfully!";
 
 

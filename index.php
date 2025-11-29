@@ -318,7 +318,7 @@ if (isset($_POST['submit'])) {
     //     }
     // }
 
-    $servername = "dpg-c1tn7wxyz12345-mysql.render.com"; // change from 127.0.0.1
+    $servername = "mysql"; // change from 127.0.0.1
     $username = "root";
     $password = "root@123";
     $dbname = "growmore";

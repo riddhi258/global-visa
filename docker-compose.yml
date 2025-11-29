@@ -10,8 +10,8 @@ services:
       # Optional: environment variables for local testing
       DB_HOST: localhost
       DB_PORT: 5432
-      DB_NAME: growmore
-      DB_USER: growmore_user
+      DB_NAME: growmore_c1tn
+      DB_USER: growmore_c1tn_user
       DB_PASSWORD: CjzTtIVUbsQgTVFzzlFa0vzGAOUnZggG
     networks:
       - app-network

@@ -320,17 +320,19 @@ if (isset($_POST['submit'])) {
 
     $host = "dpg-d4176qa4d50c73dtfcq0-a.oregon-postgres.render.com";
     $port = "5432";
-    $dbname = "growmore";
-    $user = "growmore_user";
+    $dbname = "growmore_c1tn";
+    $user = "growmore_c1tn_user";
     $pass = "CjzTtIVUbsQgTVFzzlFa0vzGAOUnZggG";
-    $conn_string = "host=$host port=$port dbname=$dbname user=$user password=$pass sslmode=require";
-    $con = pg_connect($conn_string);
+    $conn_string = "host=dpg-d4176qa4d50c73dtfcq0-a.oregon-postgres.render.com port=5432 dbname=growmore_c1tn user=growmore_c1tn_user password=CjzTtIVUbsQgTVFzzlFa0vzGAOUnZggG sslmode=require";
+
+    $con = @pg_connect($conn_string); // suppress warning
 
     if (!$con) {
-        die("Connection failed: " . pg_last_error($con));
+        die("Connection failed: Unable to connect to PostgreSQL server. Check network, credentials, and SSL.");
     }
 
     echo "Connected successfully!";
+
 
 
 

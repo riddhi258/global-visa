@@ -261,45 +261,26 @@ if (isset($_POST['submit'])) {
     $source = trim($_POST['source'] ?? '');
     $message = trim($_POST['message'] ?? '');
     $consent = isset($_POST['consent']) ? 1 : 0;
-    $newsletter = isset($_POST['newsletter']) ? 1 : 0;
-    $country_code = trim($_POST['country_code'] ?? '');
 
-    if ($country_code !== '') {
-        $country_code = preg_replace('/[^0-9+]/', '', $country_code);
-        if (strpos($country_code, '+') !== 0)
-            $country_code = '+' . $country_code;
-    }
-
-    $mobile = trim(($country_code ? $country_code . ' ' : '') . $mobile_local);
-
-    if (!$consent)
+    if (!$consent) {
         $error = "You must agree to the Terms and Conditions.";
+    }
 
     // PostgreSQL connection
-    $conn = pg_connect("host=dpg-d4176qa4d50c73dtfcq0-a.oregon-postgres.render.com port=5432 dbname=your_db user=your_user password=CjzTtIVUbsQgTVFzzlFa0vzGAOUnZggG sslmode=require");
+    $conn = pg_connect("host=dpg-d4176qa4d50c73dtfcq0-a.oregon-postgres.render.com port=5432 dbname=your_db user=your_user password=your_password sslmode=require");
 
     if (!$conn) {
-        echo "Connection failed: " . pg_last_error();
-        exit;
-    }
-
-    echo "Connected successfully!";
-
-
-
-    if (!$con) {
         die("❌ PostgreSQL Connection Failed: " . pg_last_error());
     }
-
 
     if (empty($error)) {
         $query = "INSERT INTO leads (name, email, location, mobile, inquiry, source, message) 
                   VALUES ($1, $2, $3, $4, $5, $6, $7)";
-        $result = pg_query_params($con, $query, [
+        $result = pg_query_params($conn, $query, [
             $name,
             $email,
             $location,
-            $mobile,
+            $mobile_local,
             $inquiry,
             $source,
             $message
@@ -309,11 +290,11 @@ if (isset($_POST['submit'])) {
             $success = "Form submitted successfully!";
             $_POST = [];
         } else {
-            $error = "Error submitting form: " . pg_last_error($con);
+            $error = "Error submitting form: " . pg_last_error($conn);
         }
     }
 
-    pg_close($con);
+    pg_close($conn);
 }
 ?>
 <!doctype html>

@@ -318,11 +318,13 @@ if (isset($_POST['submit'])) {
     //     }
     // }
 
-    $servername = "mysql"; // change from 127.0.0.1
-    $username = "root";
-    $password = "root@123";
-    $dbname = "growmore";
-    $con = new mysqli($servername, $username, $password, $dbname,3306);
+    $host = getenv('DB_HOST');       // provided by Render
+    $user = getenv('DB_USER');
+    $password = getenv('DB_PASSWORD');
+    $dbname = getenv('DB_NAME');
+    $port = getenv('DB_PORT');
+
+    $con = new mysqli($host, $user, $password, $dbname, $port);
 
     if ($con->connect_error) {
         die("Connection failed: " . $con->connect_error);

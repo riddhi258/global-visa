@@ -75,7 +75,7 @@ if (isset($_POST['submit'])) {
 
     if (empty($error)) {
         $query = "INSERT INTO leads (name, email, location, mobile, inquiry, source, message) 
-                  VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)";
+                  VALUES ($1, $2, $3, $4, $5, $6, $7)";
         $result = pg_query_params($con, $query, [
             $name, $email, $location, $mobile, $inquiry, $source, $message
         ]);

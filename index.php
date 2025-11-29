@@ -73,10 +73,6 @@ if (isset($_POST['submit'])) {
     $conn_string = "host=dpg-d4176qa4d50c73dtfcq0-a.oregon-postgres.render.com port=5432 dbname=growmore_c1tn user=growmore_c1tn_user password=CjzTtIVUbsQgTVFzzlFa0vzGAOUnZggG sslmode=require";
     $con = @pg_connect($conn_string);
 
-    if (!$con) {
-        die("Connection failed: Unable to connect to PostgreSQL server.");
-    }
-
     if (empty($error)) {
         $query = "INSERT INTO leads (name, email, location, mobile, inquiry, source, message, consent, newsletter) 
                   VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)";

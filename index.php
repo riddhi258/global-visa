@@ -325,7 +325,7 @@ if (isset($_POST['submit'])) {
     $con = new mysqli($servername, $username, $password, $dbname,3306);
 
     if ($con->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
+        die("Connection failed: " . $con->connect_error);
     }
     // echo "Connected successfully!";
 

@@ -1,35 +1,25 @@
 services:
   php:
     build: .
-    container_name: demo-php-1
-    depends_on:
-      - mysql
+    container_name: demo-php
     ports:
       - "8080:80"
-    volumes:
-      - ./:/var/www/html
-    networks:
-      - appnet
+    depends_on:
+      - mysql
+    environment:
+      DB_HOST: mysql
+      DB_USER: root
+      DB_PASSWORD: root@123
+      DB_NAME: growmore
 
   mysql:
     image: mysql:8
-    container_name: demo-mysql-1
+    container_name: demo-mysql
     environment:
       MYSQL_ROOT_PASSWORD: root@123
       MYSQL_DATABASE: growmore
+      MYSQL_USER: root
+      MYSQL_PASSWORD: root@123
     ports:
       - "3307:3306"
-    healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
-      interval: 5s
-      retries: 5
-    volumes:
-      - mysql_data:/var/lib/mysql
-    networks:
-      - appnet
-
-networks:
-  appnet:
-
-volumes:
-  mysql_data:
+    command: --default-authentication-plugin=mysql_native_password

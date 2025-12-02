@@ -68,41 +68,36 @@ if (isset($_POST['submit'])) {
     if (!$consent) {
         $error = "You must agree to the Terms and Conditions.";
     }
+$db_host = "dpg-d4176qa4d50c73dtfcq0-a.oregon-postgres.render.com";
+$db_port = "5432";
+$db_name = "growmore_c1tn";
+$db_user = "growmore_c1tn_user";
+$db_pass = "CjzTtIVUbsQgTVFzzlFa0vzGAOUnZggG"; // replace with your actual password
 
-    // PostgreSQL connection
-    $conn = pg_connect("host=dpg-d4176qa4d50c73dtfcq0-a.oregon-postgres.render.com 
-                    port=5432 
-                    dbname=growmore_c1tn 
-                    user=growmore_c1tn_user 
-                    password=CjzTtIVUbsQgTVFzzlFa0vzGAOUnZggG 
-                    sslmode=require");
+// SSL mode is required by Render
+$conn_string = "host=$db_host port=$db_port dbname=$db_name user=$db_user password=$db_pass sslmode=require";
 
-    if (!$conn) {
-        die("❌ PostgreSQL Connection Failed: " . pg_last_error());
-    }
+// Connect to PostgreSQL
+$conn = pg_connect($conn_string);
 
-    if (empty($error)) {
-        $query = "INSERT INTO leads (name, email, location, mobile, inquiry, source, message) 
-                  VALUES ($1, $2, $3, $4, $5, $6, $7)";
-        $result = pg_query_params($conn, $query, [
-            $name,
-            $email,
-            $location,
-            $mobile_local,
-            $inquiry,
-            $source,
-            $message
-        ]);
+// Check for connection
+if (!$conn) {
+    die("Connection failed: " . pg_last_error($conn));
+}
 
-        if ($result) {
-            $success = "Form submitted successfully!";
-            $_POST = [];
-        } else {
-            $error = "Error submitting form: " . pg_last_error($conn);
-        }
-    }
+echo "Connected successfully!";
 
-    pg_close($conn);
+// Example query
+$result = pg_query($conn, "SELECT NOW()");
+if (!$result) {
+    echo "Query error: " . pg_last_error($conn);
+} else {
+    $row = pg_fetch_assoc($result);
+    echo "Current time: " . $row['now'];
+}
+
+// Close connection
+pg_close($conn);
 }
 ?>
 <!doctype html>

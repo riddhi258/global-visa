@@ -75,8 +75,7 @@ if (isset($_POST['submit'])) {
                     dbname=growmore_c1tn 
                     user=growmore_c1tn_user 
                     password=CjzTtIVUbsQgTVFzzlFa0vzGAOUnZggG 
-                    sslmode=verify-full 
-                    sslrootcert=/usr/local/share/ca-certificates/render-root.crt");
+                    sslmode=require");
 
     if (!$conn) {
         die("❌ PostgreSQL Connection Failed: " . pg_last_error());

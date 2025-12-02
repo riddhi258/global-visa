@@ -1,254 +1,57 @@
 <?php
 $country_list = [
-    "Afghanistan",
-    "Åland Islands",
-    "Albania",
-    "Algeria",
-    "American Samoa",
-    "Andorra",
-    "Angola",
-    "Anguilla",
-    "Antarctica",
-    "Antigua and Barbuda",
-    "Argentina",
-    "Armenia",
-    "Aruba",
-    "Australia",
-    "Austria",
-    "Azerbaijan",
-    "Bahamas",
-    "Bahrain",
-    "Bangladesh",
-    "Barbados",
-    "Belarus",
-    "Belgium",
-    "Belize",
-    "Benin",
-    "Bermuda",
-    "Bhutan",
-    "Bolivia (Plurinational State of)",
-    "Bonaire, Sint Eustatius and Saba",
-    "Bosnia and Herzegovina",
-    "Botswana",
-    "Bouvet Island",
-    "Brazil",
-    "British Indian Ocean Territory",
-    "Brunei Darussalam",
-    "Bulgaria",
-    "Burkina Faso",
-    "Burundi",
-    "Cabo Verde",
-    "Cambodia",
-    "Cameroon",
-    "Canada",
-    "Cayman Islands",
-    "Central African Republic",
-    "Chad",
-    "Chile",
-    "China",
-    "Christmas Island",
-    "Cocos (Keeling) Islands",
-    "Colombia",
-    "Comoros",
-    "Congo",
-    "Congo, Democratic Republic of the",
-    "Cook Islands",
-    "Costa Rica",
-    "Côte d'Ivoire",
-    "Croatia",
-    "Cuba",
-    "Curaçao",
-    "Cyprus",
-    "Czechia",
-    "Denmark",
-    "Djibouti",
-    "Dominica",
-    "Dominican Republic",
-    "Ecuador",
-    "Egypt",
-    "El Salvador",
-    "Equatorial Guinea",
-    "Eritrea",
-    "Estonia",
-    "Eswatini",
-    "Ethiopia",
-    "Falkland Islands (Malvinas)",
-    "Faroe Islands",
-    "Fiji",
-    "Finland",
-    "France",
-    "French Guiana",
-    "French Polynesia",
-    "French Southern Territories",
-    "Gabon",
-    "Gambia",
-    "Georgia",
-    "Germany",
-    "Ghana",
-    "Gibraltar",
-    "Greece",
-    "Greenland",
-    "Grenada",
-    "Guadeloupe",
-    "Guam",
-    "Guatemala",
-    "Guernsey",
-    "Guinea",
-    "Guinea-Bissau",
-    "Guyana",
-    "Haiti",
-    "Heard Island and McDonald Islands",
-    "Holy See",
-    "Honduras",
-    "Hong Kong",
-    "Hungary",
-    "Iceland",
-    "India",
-    "Indonesia",
-    "Iran (Islamic Republic of)",
-    "Iraq",
-    "Ireland",
-    "Isle of Man",
-    "Israel",
-    "Italy",
-    "Jamaica",
-    "Japan",
-    "Jersey",
-    "Jordan",
-    "Kazakhstan",
-    "Kenya",
-    "Kiribati",
-    "Korea (Democratic People's Republic of)",
-    "Korea, Republic of",
-    "Kuwait",
-    "Kyrgyzstan",
-    "Lao People's Democratic Republic",
-    "Latvia",
-    "Lebanon",
-    "Lesotho",
-    "Liberia",
-    "Libya",
-    "Liechtenstein",
-    "Lithuania",
-    "Luxembourg",
-    "Macao",
-    "Madagascar",
-    "Malawi",
-    "Malaysia",
-    "Maldives",
-    "Mali",
-    "Malta",
-    "Marshall Islands",
-    "Martinique",
-    "Mauritania",
-    "Mauritius",
-    "Mayotte",
-    "Mexico",
-    "Micronesia (Federated States of)",
-    "Moldova, Republic of",
-    "Monaco",
-    "Mongolia",
-    "Montenegro",
-    "Montserrat",
-    "Morocco",
-    "Mozambique",
-    "Myanmar",
-    "Namibia",
-    "Nauru",
-    "Nepal",
-    "Netherlands",
-    "New Caledonia",
-    "New Zealand",
-    "Nicaragua",
-    "Niger",
-    "Nigeria",
-    "Niue",
-    "Norfolk Island",
-    "North Macedonia",
-    "Northern Mariana Islands",
-    "Norway",
-    "Oman",
-    "Pakistan",
-    "Palau",
-    "Palestine, State of",
-    "Panama",
-    "Papua New Guinea",
-    "Paraguay",
-    "Peru",
-    "Philippines",
-    "Pitcairn",
-    "Poland",
-    "Portugal",
-    "Puerto Rico",
-    "Qatar",
-    "Réunion",
-    "Romania",
-    "Russian Federation",
-    "Rwanda",
-    "Saint Barthélemy",
-    "Saint Helena, Ascension and Tristan da Cunha",
-    "Saint Kitts and Nevis",
-    "Saint Lucia",
-    "Saint Martin (French part)",
-    "Saint Pierre and Miquelon",
-    "Saint Vincent and the Grenadines",
-    "Samoa",
-    "San Marino",
-    "Sao Tome and Principe",
-    "Saudi Arabia",
-    "Senegal",
-    "Serbia",
-    "Seychelles",
-    "Sierra Leone",
-    "Singapore",
-    "Sint Maarten (Dutch part)",
-    "Slovakia",
-    "Slovenia",
-    "Solomon Islands",
-    "Somalia",
-    "South Africa",
-    "South Georgia and the South Sandwich Islands",
-    "South Sudan",
-    "Spain",
-    "Sri Lanka",
-    "Sudan",
-    "Suriname",
-    "Svalbard and Jan Mayen",
-    "Sweden",
-    "Switzerland",
-    "Syrian Arab Republic",
-    "Taiwan, Province of China",
-    "Tajikistan",
-    "Tanzania, United Republic of",
-    "Thailand",
-    "Timor-Leste",
-    "Togo",
-    "Tokelau",
-    "Tonga",
-    "Trinidad and Tobago",
-    "Tunisia",
-    "Türkiye",
-    "Turkmenistan",
-    "Turks and Caicos Islands",
-    "Tuvalu",
-    "Uganda",
-    "Ukraine",
-    "United Arab Emirates",
-    "United Kingdom of Great Britain and Northern Ireland",
-    "United States of America",
-    "United States Minor Outlying Islands",
-    "Uruguay",
-    "Uzbekistan",
-    "Vanuatu",
-    "Venezuela (Bolivarian Republic of)",
-    "Viet Nam",
-    "Virgin Islands (British)",
-    "Virgin Islands (U.S.)",
-    "Wallis and Futuna",
-    "Western Sahara",
-    "Yemen",
-    "Zambia",
-    "Zimbabwe"
+    "Afghanistan", "Åland Islands", "Albania", "Algeria", "American Samoa", "Andorra",
+    "Angola", "Anguilla", "Antarctica", "Antigua and Barbuda", "Argentina", "Armenia",
+    "Aruba", "Australia", "Austria", "Azerbaijan", "Bahamas", "Bahrain", "Bangladesh",
+    "Barbados", "Belarus", "Belgium", "Belize", "Benin", "Bermuda", "Bhutan",
+    "Bolivia (Plurinational State of)", "Bonaire, Sint Eustatius and Saba",
+    "Bosnia and Herzegovina", "Botswana", "Bouvet Island", "Brazil",
+    "British Indian Ocean Territory", "Brunei Darussalam", "Bulgaria", "Burkina Faso",
+    "Burundi", "Cabo Verde", "Cambodia", "Cameroon", "Canada", "Cayman Islands",
+    "Central African Republic", "Chad", "Chile", "China", "Christmas Island",
+    "Cocos (Keeling) Islands", "Colombia", "Comoros", "Congo",
+    "Congo, Democratic Republic of the", "Cook Islands", "Costa Rica", "Côte d'Ivoire",
+    "Croatia", "Cuba", "Curaçao", "Cyprus", "Czechia", "Denmark", "Djibouti",
+    "Dominica", "Dominican Republic", "Ecuador", "Egypt", "El Salvador",
+    "Equatorial Guinea", "Eritrea", "Estonia", "Eswatini", "Ethiopia",
+    "Falkland Islands (Malvinas)", "Faroe Islands", "Fiji", "Finland", "France",
+    "French Guiana", "French Polynesia", "French Southern Territories", "Gabon",
+    "Gambia", "Georgia", "Germany", "Ghana", "Gibraltar", "Greece", "Greenland",
+    "Grenada", "Guadeloupe", "Guam", "Guatemala", "Guernsey", "Guinea",
+    "Guinea-Bissau", "Guyana", "Haiti", "Heard Island and McDonald Islands",
+    "Holy See", "Honduras", "Hong Kong", "Hungary", "Iceland", "India", "Indonesia",
+    "Iran (Islamic Republic of)", "Iraq", "Ireland", "Isle of Man", "Israel", "Italy",
+    "Jamaica", "Japan", "Jersey", "Jordan", "Kazakhstan", "Kenya", "Kiribati",
+    "Korea (Democratic People's Republic of)", "Korea, Republic of", "Kuwait",
+    "Kyrgyzstan", "Lao People's Democratic Republic", "Latvia", "Lebanon", "Lesotho",
+    "Liberia", "Libya", "Liechtenstein", "Lithuania", "Luxembourg", "Macao",
+    "Madagascar", "Malawi", "Malaysia", "Maldives", "Mali", "Malta",
+    "Marshall Islands", "Martinique", "Mauritania", "Mauritius", "Mayotte", "Mexico",
+    "Micronesia (Federated States of)", "Moldova, Republic of", "Monaco", "Mongolia",
+    "Montenegro", "Montserrat", "Morocco", "Mozambique", "Myanmar", "Namibia",
+    "Nauru", "Nepal", "Netherlands", "New Caledonia", "New Zealand", "Nicaragua",
+    "Niger", "Nigeria", "Niue", "Norfolk Island", "North Macedonia",
+    "Northern Mariana Islands", "Norway", "Oman", "Pakistan", "Palau",
+    "Palestine, State of", "Panama", "Papua New Guinea", "Paraguay", "Peru",
+    "Philippines", "Pitcairn", "Poland", "Portugal", "Puerto Rico", "Qatar",
+    "Réunion", "Romania", "Russian Federation", "Rwanda", "Saint Barthélemy",
+    "Saint Helena, Ascension and Tristan da Cunha", "Saint Kitts and Nevis",
+    "Saint Lucia", "Saint Martin (French part)", "Saint Pierre and Miquelon",
+    "Saint Vincent and the Grenadines", "Samoa", "San Marino",
+    "Sao Tome and Principe", "Saudi Arabia", "Senegal", "Serbia", "Seychelles",
+    "Sierra Leone", "Singapore", "Sint Maarten (Dutch part)", "Slovakia",
+    "Slovenia", "Solomon Islands", "Somalia", "South Africa",
+    "South Georgia and the South Sandwich Islands", "South Sudan", "Spain",
+    "Sri Lanka", "Sudan", "Suriname", "Svalbard and Jan Mayen", "Sweden",
+    "Switzerland", "Syrian Arab Republic", "Taiwan, Province of China",
+    "Tajikistan", "Tanzania, United Republic of", "Thailand", "Timor-Leste",
+    "Togo", "Tokelau", "Tonga", "Trinidad and Tobago", "Tunisia", "Turkey",
+    "Turkmenistan", "Turks and Caicos Islands", "Tuvalu", "Uganda", "Ukraine",
+    "United Arab Emirates", "United Kingdom of Great Britain and Northern Ireland",
+    "United States of America", "United States Minor Outlying Islands", "Uruguay",
+    "Uzbekistan", "Vanuatu", "Venezuela (Bolivarian Republic of)", "Viet Nam",
+    "Virgin Islands (British)", "Virgin Islands (U.S.)", "Wallis and Futuna",
+    "Western Sahara", "Yemen", "Zambia", "Zimbabwe"
 ];
 
 if (isset($_POST['submit'])) {
@@ -305,7 +108,6 @@ if (isset($_POST['submit'])) {
 ?>
 <!doctype html>
 <html lang="en">
-
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -321,10 +123,8 @@ if (isset($_POST['submit'])) {
         </div>
         <div class="card">
             <div class="feedback">
-                <?php if (!empty($success))
-                    echo "<div class='success'>" . htmlspecialchars($success) . "</div>"; ?>
-                <?php if (!empty($error))
-                    echo "<div class='error'>" . htmlspecialchars($error) . "</div>"; ?>
+                <?php if (!empty($success)) echo "<div class='success'>" . htmlspecialchars($success) . "</div>"; ?>
+                <?php if (!empty($error)) echo "<div class='error'>" . htmlspecialchars($error) . "</div>"; ?>
             </div>
 
             <form action="" method="post" enctype="multipart/form-data" novalidate>
@@ -359,53 +159,54 @@ if (isset($_POST['submit'])) {
                             value="<?php echo htmlspecialchars($_POST['mobile'] ?? ''); ?>">
                     </div>
                 </div>
+
                 <div class="field">
                     <label for="inquiry">My Today's Inquiry about? <span class="req">*</span></label>
                     <select id="inquiry" name="inquiry" required>
                         <option value="">Select service type</option>
-                        <option value="Student Visa" <?php if (($_POST['inquiry'] ?? '') === 'Student Visa')
-                            echo 'selected'; ?>>Student Visa</option>
+                        <option value="Student Visa" <?php if (($_POST['inquiry'] ?? '') === 'Student Visa') echo 'selected'; ?>>Student Visa</option>
                     </select>
                 </div>
+
                 <div class="field">
                     <label for="source">Where do you find us? <span class="req">*</span></label>
                     <select id="source" name="source" required>
                         <option value="">Select source</option>
-                        <option value="Website" <?php if (($_POST['source'] ?? '') === 'Website')
-                            echo 'selected'; ?>>
-                            Website</option>
-                        <option value="Referral" <?php if (($_POST['source'] ?? '') === 'Referral')
-                            echo 'selected'; ?>>
-                            Referral</option>
-                        <option value="Social Media" <?php if (($_POST['source'] ?? '') === 'Social Media')
-                            echo 'selected'; ?>>Social Media</option>
+                        <option value="Website" <?php if (($_POST['source'] ?? '') === 'Website') echo 'selected'; ?>>Website</option>
+                        <option value="Referral" <?php if (($_POST['source'] ?? '') === 'Referral') echo 'selected'; ?>>Referral</option>
+                        <option value="Social Media" <?php if (($_POST['source'] ?? '') === 'Social Media') echo 'selected'; ?>>Social Media</option>
                     </select>
                 </div>
+
                 <div class="field full">
                     <label for="message">Message</label>
                     <textarea id="message" name="message" placeholder="Enter personal message"
                         rows="4"><?php echo htmlspecialchars($_POST['message'] ?? ''); ?></textarea>
                 </div>
+
                 <div class="field checkbox-group full">
                     <label class="checkbox">
-                        <input type="checkbox" name="consent" value="1" <?php if (isset($_POST['consent']))
-                            echo 'checked'; ?> required>
+                        <input type="checkbox" name="consent" value="1" 
+                            <?php if (isset($_POST['consent'])) echo 'checked'; ?> required>
                         <div>I agree to the Terms and Conditions and Privacy Policy. <span class="req">*</span></div>
                     </label>
+
                     <label class="checkbox">
-                        <input type="checkbox" name="newsletter" value="1" <?php if (isset($_POST['newsletter']))
-                            echo 'checked'; ?>>
+                        <input type="checkbox" name="newsletter" value="1" 
+                            <?php if (isset($_POST['newsletter'])) echo 'checked'; ?>>
                         <div>Yes, I would like to signup for Growmore immigration newsletter.</div>
                     </label>
+
                     <div class="note">By submitting you agree to our Terms and Privacy Policy.</div>
+
                     <div class="btn-row">
                         <button type="button" class="btn btn-cancel" onclick="window.history.back();">Cancel</button>
                         <button type="submit" name="submit" class="btn btn-save">Save</button>
                     </div>
                 </div>
             </form>
+
         </div>
     </div>
 </body>
-
 </html>

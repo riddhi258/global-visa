@@ -290,20 +290,25 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $message = trim($_POST['message'] ?? '');
 
     if ($name === "" || $email === "" || $mobile === "") {
-        echo "<p style='color:red;'>Please fill all required fields.</p>";
-        exit;
+        $error = "Please fill all required fields.";
+    } else {
+        $stmt = $pdo->prepare("
+            INSERT INTO inquiries (name, email, location, mobile, inquiry, source, message)
+            VALUES (?, ?, ?, ?, ?, ?, ?)
+        ");
+
+        if ($stmt->execute([$name, $email, $location, $mobile, $inquiry, $source, $message])) {
+            // Redirect to clear POST data
+                $success = "Your inquiry has been submitted successfully.";
+            header("Location: " . $_SERVER['PHP_SELF'] . "?success=1");
+            exit;
+        } else {
+            $error = "There was an error submitting your inquiry. Please try again.";
+        }
+          
     }
-
-    $stmt = $pdo->prepare("
-        INSERT INTO inquiries (name, email, location, mobile, inquiry, source, message)
-        VALUES (?, ?, ?, ?, ?, ?, ?)
-    ");
-
-   ($stmt->execute([$name, $email, $location, $mobile, $inquiry, $source, $message]))
-        ? $success = "✅ Your inquiry has been submitted successfully."
-        : $error = "❌ There was an error submitting your inquiry. Please try again.";
-
 }
+
 
 
 ?>

@@ -298,11 +298,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         INSERT INTO inquiries (name, email, location, mobile, inquiry, source, message)
         VALUES (?, ?, ?, ?, ?, ?, ?)
     ");
-if ($stmt->execute([$name, $email, $location, $mobile, $inquiry, $source, $message])) {
-    echo "<div style='color:green; text-align:center; font-weight:bold; margin-top:10px;'>Inquiry submitted successfully!</div>";
-} else {
-    echo "<div style='color:red; text-align:center; font-weight:bold; margin-top:10px;'>Error saving data.</div>";
-}
+    if ($stmt->execute([$name, $email, $location, $mobile, $inquiry, $source, $message])) {
+        echo "<div style='color:green; text-align:center; font-weight:bold; margin-top:10px;'>Inquiry submitted successfully!</div>";
+    } else {
+        echo "<div style='color:red; text-align:center; font-weight:bold; margin-top:10px;'>Error saving data.</div>";
+    }
 
 }
 
@@ -326,10 +326,13 @@ if ($stmt->execute([$name, $email, $location, $mobile, $inquiry, $source, $messa
         </div>
         <div class="card">
             <div class="feedback">
-                <?php if (!empty($success))
-                    echo "<div class='success'>" . htmlspecialchars($success) . "</div>"; ?>
-                <?php if (!empty($error))
-                    echo "<div class='error'>" . htmlspecialchars($error) . "</div>"; ?>
+                <?php
+                if ($stmt->execute([$name, $email, $location, $mobile, $inquiry, $source, $message])) {
+                    echo "<div style='color:green; text-align:center; font-weight:bold; margin-top:10px;'>Inquiry submitted successfully!</div>";
+                } else {
+                    echo "<div style='color:red; text-align:center; font-weight:bold; margin-top:10px;'>Error saving data.</div>";
+                }
+                ?>
             </div>
 
             <form action="" method="post" enctype="multipart/form-data" novalidate>

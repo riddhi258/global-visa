@@ -302,7 +302,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         if ($stmt->execute([$name, $email, $location, $mobile, $inquiry, $source, $message])) {
             // Redirect to clear POST data
             $success = "Your inquiry has been submitted successfully.";
-            header($_SERVER['PHP_SELF'] . "?success=1");
+            header("Location: " . $_SERVER['PHP_SELF'] . "?success=1");
             exit;
         } else {
             $error = "There was an error submitting your inquiry. Please try again.";

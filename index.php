@@ -251,15 +251,8 @@ $country_list = [
     "Zimbabwe"
 ];
 
-// ---------- DATABASE CONNECTION ----------
-// $db_host = "dpg-d4176qa4d50c73dtfcq0-a.oregon-postgres.render.com";
-// $db_port = "5432";
-// $db_name = "growmore_c1tn";
-// $db_user = "growmore_c1tn_user";
-// $db_pass = "CjzTtIVUbsQgTVFzzlFa0vzGAOUnZggG";
-
-// ---------- DATABASE CONNECTION ----------
-
+$success = ''; // initialize
+$error = '';
 try {
     $dsn = "pgsql:host=dpg-d4176qa4d50c73dtfcq0-a.oregon-postgres.render.com;port=5432;dbname=growmore_c1tn;sslmode=require";
 
@@ -277,9 +270,11 @@ try {
     die("❌ DB Connection Failed: " . $e->getMessage());
 }
 
-$success = ''; // initialize
-$error = '';
 
+
+if (isset($_GET['success']) && $_GET['success'] == 1) {
+    $success = "Your inquiry has been submitted successfully.";
+}
 // ---------- FORM SUBMISSION ----------
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
@@ -309,9 +304,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         }
           
     }
-    if (isset($_GET['success']) && $_GET['success'] == 1) {
-    $success = "Your inquiry has been submitted successfully.";
-}
+
 }
 
 

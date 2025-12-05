@@ -277,6 +277,8 @@ try {
     die("❌ DB Connection Failed: " . $e->getMessage());
 }
 
+$success = ''; // initialize
+$error = '';
 
 // ---------- FORM SUBMISSION ----------
 if ($_SERVER["REQUEST_METHOD"] === "POST") {

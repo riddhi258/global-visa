@@ -299,12 +299,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         VALUES (?, ?, ?, ?, ?, ?, ?)
     ");
 
-  if ($stmt->execute([$name, $email, $location, $mobile, $inquiry, $source, $message])) {
-    echo "<p style='color:green; text-align:center;'>Inquiry submitted successfully!</p>";
-} else {
-    echo "<p style='color:red; text-align:center;'>Error saving data.</p>";
-}
-
 }
 
 

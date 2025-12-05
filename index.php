@@ -299,6 +299,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         VALUES (?, ?, ?, ?, ?, ?, ?)
     ");
 
+   ($stmt->execute([$name, $email, $location, $mobile, $inquiry, $source, $message]))
+        ? $success = "✅ Your inquiry has been submitted successfully."
+        : $error = "❌ There was an error submitting your inquiry. Please try again.";
+
 }
 
 

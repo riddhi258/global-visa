@@ -251,57 +251,62 @@ $country_list = [
     "Zimbabwe"
 ];
 
-if (isset($_POST['submit'])) {
+// ---------- DATABASE CONNECTION ----------
+// $db_host = "dpg-d4176qa4d50c73dtfcq0-a.oregon-postgres.render.com";
+// $db_port = "5432";
+// $db_name = "growmore_c1tn";
+// $db_user = "growmore_c1tn_user";
+// $db_pass = "CjzTtIVUbsQgTVFzzlFa0vzGAOUnZggG";
+
+// ---------- DATABASE CONNECTION ----------
+
+try {
+    $dsn = "pgsql:host=dpg-d4176qa4d50c73dtfcq0-a.oregon-postgres.render.com;port=5432;dbname=growmore_c1tn;sslmode=require";
+
+    $pdo = new PDO(
+        $dsn,
+        "growmore_c1tn_user",
+        "CjzTtIVUbsQgTVFzzlFa0vzGAOUnZggG",
+        [
+            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+            PDO::PGSQL_ATTR_DISABLE_PREPARES => true
+        ]
+    );
+
+} catch (PDOException $e) {
+    die("❌ DB Connection Failed: " . $e->getMessage());
+}
+
+
+// ---------- FORM SUBMISSION ----------
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     $name = trim($_POST['name'] ?? '');
     $email = trim($_POST['email'] ?? '');
     $location = trim($_POST['location'] ?? '');
-    $mobile_local = trim($_POST['mobile'] ?? '');
+    $mobile = trim($_POST['mobile'] ?? '');
     $inquiry = trim($_POST['inquiry'] ?? '');
     $source = trim($_POST['source'] ?? '');
     $message = trim($_POST['message'] ?? '');
-    $consent = isset($_POST['consent']) ? 1 : 0;
 
-    if (!$consent) {
-        $error = "You must agree to the Terms and Conditions.";
+    if ($name === "" || $email === "" || $mobile === "") {
+        echo "<p style='color:red;'>Please fill all required fields.</p>";
+        exit;
     }
 
-    // PostgreSQL connection
-    $conn = pg_connect("host=dpg-d4176qa4d50c73dtfcq0-a.oregon-postgres.render.com 
-                    port=5432 
-                    dbname=growmore_c1tn 
-                    user=growmore_c1tn_user 
-                    password=CjzTtIVUbsQgTVFzzlFa0vzGAOUnZggG 
-                    sslmode=verify-full 
-                    sslrootcert=/usr/local/share/ca-certificates/render-root.crt");
-
-    if (!$conn) {
-        die("❌ PostgreSQL Connection Failed: " . pg_last_error());
-    }
-
-    if (empty($error)) {
-        $query = "INSERT INTO leads (name, email, location, mobile, inquiry, source, message) 
-                  VALUES ($1, $2, $3, $4, $5, $6, $7)";
-        $result = pg_query_params($conn, $query, [
-            $name,
-            $email,
-            $location,
-            $mobile_local,
-            $inquiry,
-            $source,
-            $message
-        ]);
-
-        if ($result) {
-            $success = "Form submitted successfully!";
-            $_POST = [];
-        } else {
-            $error = "Error submitting form: " . pg_last_error($conn);
-        }
-    }
-
-    pg_close($conn);
+    $stmt = $pdo->prepare("
+        INSERT INTO inquiries (name, email, location, mobile, inquiry, source, message)
+        VALUES (?, ?, ?, ?, ?, ?, ?)
+    ");
+if ($stmt->execute([$name, $email, $location, $mobile, $inquiry, $source, $message])) {
+    echo "<div style='color:green; text-align:center; font-weight:bold; margin-top:10px;'>Inquiry submitted successfully!</div>";
+} else {
+    echo "<div style='color:red; text-align:center; font-weight:bold; margin-top:10px;'>Error saving data.</div>";
 }
+
+}
+
+
 ?>
 <!doctype html>
 <html lang="en">
